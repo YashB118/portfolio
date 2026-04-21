@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal.jsx';
 import ProjectIllustration from '../components/ProjectIllustration.jsx';
-import api from '../lib/api.js';
+import { PROJECTS_DATA } from '../data/projects.js';
 
 const ProjectsSpine3D = lazy(() => import('../components/three/ProjectsSpine3D.jsx'));
 
@@ -108,9 +108,8 @@ export default function Projects() {
 
   useEffect(() => {
     setLoading(true);
-    api.get('/api/projects')
-      .then((r) => { setAllProjects(r.data.data || []); setLoading(false); })
-      .catch(() => setLoading(false));
+    setAllProjects(PROJECTS_DATA);
+    setLoading(false);
   }, []);
 
   const projects = useMemo(() => {
