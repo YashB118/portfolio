@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
-import axios from 'axios';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal.jsx';
 import ProjectIllustration from '../components/ProjectIllustration.jsx';
+import api from '../lib/api.js';
 
 const ProjectsSpine3D = lazy(() => import('../components/three/ProjectsSpine3D.jsx'));
 
@@ -108,7 +108,7 @@ export default function Projects() {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('/api/projects')
+    api.get('/api/projects')
       .then((r) => { setAllProjects(r.data.data || []); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);

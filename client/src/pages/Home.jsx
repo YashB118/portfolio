@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import ScrollReveal from '../components/ScrollReveal.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
+import api from '../lib/api.js';
 
 const HeroConstellation = lazy(() => import('../components/three/HeroConstellation.jsx'));
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/projects/featured')
+    api.get('/api/projects/featured')
       .then((r) => setFeatured(r.data.data || []))
       .catch(() => {});
   }, []);

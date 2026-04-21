@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api.js';
 
 const INIT = { name: '', email: '', subject: '', message: '' };
 
@@ -31,7 +31,7 @@ export default function ContactForm() {
 
     setStatus('sending');
     try {
-      const res = await axios.post('/api/contact', form);
+      const res = await api.post('/api/contact', form);
       if (res.data.success) {
         setStatus('success');
         setServerMsg(res.data.message);
